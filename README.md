@@ -19,7 +19,7 @@ src
 └── index.page.html
 ```
 
-Example dist tree containing merged HTML files:
+Resulting dist tree (containing merged HTML files):
 ```
 dist
 ├── blog
