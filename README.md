@@ -74,3 +74,10 @@ docker compose up -d --build
    - Components (`*.comp.html`) → `build/` (cache)
    - Other files → `dist/`
    - Static files → copy to `dist/`
+
+
+## Hot Reloading (Hack)
+
+```bash
+while 1; do sleep 2; npm run build; done;
+```
