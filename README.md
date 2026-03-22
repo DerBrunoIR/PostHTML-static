@@ -27,9 +27,6 @@ dist
 └── index.html
 ```
 
-By running `docker compose up -d --build` both pages are accessible at `<domain>/` and `<domain>/blog`.
-Since no page `about.page.html` or `about/index.page.html` exist in the source tree no such file is created in the dist tree, and therefore, links to `<domain>/about` will return a **404**.
-
 ## Include Syntax
 
 ```html
