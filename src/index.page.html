@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+</head>
+<body>
+  <include src="components/header.comp.html"></include>
+  <main>
+    <h2>Welcome!</h2>
+    <p>This is the home page.</p>
+    <include src="components/button.comp.html">
+{
+  "class": "primary",
+  "text": "Click Me"
+}
+</include>
+  </main>
+  <include src="components/footer.comp.html"></include>
+  <img src="/images/logo.png">
+</body>
+</html>

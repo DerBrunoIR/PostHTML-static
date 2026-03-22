@@ -1,0 +1,18 @@
+services:
+  website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: website
+    restart: unless-stopped
+    volumes:
+      # Mount the current directory to Nginx. Read-only for security.
+      - ./dist:/www:ro
+    networks:
+      - proxynet
+    ports:
+      - 80:80
+
+networks:
+  proxynet:
+    # external: true
