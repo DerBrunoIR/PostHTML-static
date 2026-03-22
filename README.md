@@ -60,13 +60,3 @@ docker compose up -d --build
 | `*.page.html` | Page template | `./dist/` |
 | `*.comp.html` | Reusable component | `./build/` |
 
-
-## Build Process
-
-1. **Discovery** — Recursively locate all HTML files in `./src/`
-2. **Dependency Analysis** — Extract `<include src="...">` references using regex
-3. **Topological Sort** — Order files using Kahn's algorithm to satisfy dependencies
-4. **Build** — Process each file with PostHTML, resolving includes via `posthtml-include`
-5. **Write** — Components → `./build/`, Pages → `./dist/`
-6. **Copy** - static resources → `./dist`.
-
