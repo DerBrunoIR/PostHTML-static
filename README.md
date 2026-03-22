@@ -1,4 +1,4 @@
-# PostHTML-build
+# PostHTML-static
 
 Template repository for building static websites with minimal effort. 
 
