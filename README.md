@@ -76,7 +76,7 @@ docker compose up -d --build
    - Static files → copy to `dist/`
 
 
-## Hot Reloading (Hack)
+## Automatic Reloading
 Bash:
 ```bash
 while 1; do sleep 1; npm run build; done;
