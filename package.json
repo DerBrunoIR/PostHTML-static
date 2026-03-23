@@ -3,6 +3,7 @@
     "posthtml-include": "^2.0.1"
   },
   "scripts": {
-    "build": "node build.js"
+    "build": "node build.js",
+    "dev": "while :; do npm run build; sleep 1; done;"
   }
 }
