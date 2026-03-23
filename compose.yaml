@@ -1,18 +1,14 @@
 services:
   website:
+    image: postHTML-static:latest
     build:
       context: .
       dockerfile: Dockerfile
     container_name: website
     restart: unless-stopped
     volumes:
-      # Mount the current directory to Nginx. Read-only for security.
-      - ./dist:/www:ro
-    networks:
-      - proxynet
+      # ./dist is copied and mounted to the container, see ./Dockerfile.
+      # This way no container restarts are necessary for development.
+      - ./dist:/www:ro # for development
     ports:
       - 80:80
-
-networks:
-  proxynet:
-    # external: true
