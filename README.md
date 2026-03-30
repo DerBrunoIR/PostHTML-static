@@ -60,7 +60,7 @@ docker compose up -d --build
 | `*.page.html` | Page template | `./dist/` |
 | `*.comp.html` | Reusable component | `./build/` |
 
-## Building Process
+## How the building process works?
 
 1. Find all HTML files in `src/`
 2. Parse each file to extract `<include>` tags
