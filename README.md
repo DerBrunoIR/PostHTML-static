@@ -1,11 +1,14 @@
 # PostHTML-static
 
-This template repository contains scripts and config files for building HTML from a source tree of modular HTML files and serving the resulting HTML files via an Nginx docker container.
+Developing, building, serving and distributing static websites should be not harder than writing HTML.
+PostHTML-include provides an HTML `include` tag for importing other HTML moduls.
+Our build script can resolve nested HTML moduls into servable HTML files.
+Nginx is configured to serve the file tree via HTTP.
+And the preconfigured docker container is used for distributing the static website.
 
-**Features**: 
-- Source tree based routing via Nginx,
-- HTML modules via <a href="https://github.com/posthtml/posthtml-include">PostHTML-include</a>,
-- distributable via docker container.
+The build script diffirentiates between components and pages via the file extension.
+- A page can be accessed by users.
+- A component can only be accessed if it is included in a page. 
 
 Example source tree:
 ```
@@ -21,7 +24,7 @@ src
 └── index.page.html
 ```
 
-Resulting dist tree (contains non-HTML files and merged HTML modules):
+Resulting dist tree:
 ```
 dist
 ├── blog
@@ -31,6 +34,7 @@ dist
 └── index.html
 
 ```
+Note: Non HTML files, like `images/logo.png`, are also copied to the distributed tree.
 
 ## Include Syntax
 
@@ -42,8 +46,7 @@ dist
 <include src="/components/header.comp.html"></include>
 ```
 
-See <a href="https://github.com/posthtml/posthtml-include">PostHTML-include</a> for more details, like parameters.
-`./src` contains an example website.
+See <a href="https://github.com/posthtml/posthtml-include">PostHTML-include</a> for more details, like passing parameters.
 
 ## Usage
 
@@ -58,26 +61,20 @@ npm run build
 npm run dev
 ```
 
-Serve changing files from `./dist` via nginx docker container:
+The docker container is configured to mount the `./dist` directory as a volume.
+Therefore, changed in the dist tree are reflected without the need to rebuild the container.
 ```bash
 docker compose up -d --build
 ```
-For distribution, comment the `./dist` volume inside the docker compose file and rebuild the container.
-This volume allows Nginx to see changes made to files in the `./dist` directory. 
-On build time `./dist` is also copied into the container.
+For distribution, its recommended to comment the `./dist` volume inside the docker compose file before building the container.
+Otherwise, the copied dist tree might not be accessible to Nginx.
 
-## File Conventions
-
-| Pattern | Purpose | Output |
-|---------|---------|--------|
-| `*.page.html` | Page template | `./dist/` |
-| `*.comp.html` | Reusable component | `./build/` |
 
 ## How the building process works?
 
 1. Find all HTML files in `src/`
 2. Parse each file to extract `<include>` tags
-3. Sort files so dependencies build first; abort if circular
+3. Find a topological ordering; abort if circular
 4. Process each file:
    - Inline included components
    - Replace `{{ variables }}` with JSON values
