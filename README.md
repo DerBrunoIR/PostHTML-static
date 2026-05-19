@@ -3,8 +3,9 @@
 Developing, building, serving and distributing static websites should be not harder than writing HTML.
 PostHTML-include provides an HTML `include` tag for importing other HTML moduls.
 Our build script can resolve nested HTML moduls into servable HTML files.
-Nginx is configured to serve the file tree via HTTP.
-And the preconfigured docker container is used for distributing the static website.
+Nginx is configured to serve the file tree via HTTP. 
+We refer to the served file tree as *dist tree*. 
+And the preconfigured docker container is used for distributing the dist tree and Nginx.
 
 The build script diffirentiates between components and pages via the file extension.
 - A page can be accessed by users.
@@ -75,13 +76,8 @@ Otherwise, the copied dist tree might not be accessible to Nginx.
 1. Find all HTML files in `src/`
 2. Parse each file to extract `<include>` tags
 3. Find a topological ordering; abort if circular
-4. Process each file:
+4. Process each HTML file:
    - Inline included components
-   - Replace `{{ variables }}` with JSON values
-   - Cache built components
-5. Write output:
-   - Pages (`*.page.html`) → `dist/`
-   - Components (`*.comp.html`) → `build/` (cache)
-   - Other files → `dist/`
-   - Static files → copy to `dist/`
+   - Cache newly built component
+5. Write dist tree
 
