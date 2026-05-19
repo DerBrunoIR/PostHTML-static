@@ -66,7 +66,7 @@ npm run dev
 ```
 
 The docker container is configured to mount the `./dist` directory as a volume.
-Therefore, changed in the dist tree are reflected without the need to rebuild the container.
+Therefore, changes in the dist tree are reflected without the need to rebuild the container.
 ```bash
 docker compose up -d --build
 ```
