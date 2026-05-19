@@ -1,7 +1,7 @@
 # PostHTML-static
 
 Developing, building, serving and distributing static websites should be not harder than writing HTML.
-PostHTML-include provides an HTML `include` tag for importing other HTML moduls.
+The JS library PostHTML-include provides an HTML `include` tag for importing other HTML moduls.
 Our build script can resolve nested HTML moduls into servable HTML files.
 Nginx is configured to serve the file tree via HTTP. 
 We refer to the served file tree as *dist tree*. 
